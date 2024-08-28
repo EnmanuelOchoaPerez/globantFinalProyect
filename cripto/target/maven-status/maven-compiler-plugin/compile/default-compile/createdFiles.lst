@@ -1,4 +1,8 @@
+globant\controladores\TransactionControl.class
 globant\clases\Usuario$1.class
 globant\clases\Usuario.class
-globant\cripto\Vista.class
 globant\controladores\UsuarioControl.class
+globant\vistas\Vista.class
+globant\vistas\TransactionMenu.class
+globant\vistas\UnloggedMenu.class
+globant\vistas\MainMenu.class

@@ -4,11 +4,18 @@
  */
 package globant.vistas;
 
+import java.util.HashMap;
+import java.util.Map;
+
 /**
  *
  * @author Enmanuel
  */
 public interface Menu {
-    void mostrarMenu();
-    String seleccionarOpcion(String opcion);
+    public static String separador = new String(new char[50]).replace('\0', '=');
+    public static final Map<String, Runnable> opciones = new HashMap<>();
+
+//    static String seleccionarOpcion(String opcion){
+//        
+//    }
 }

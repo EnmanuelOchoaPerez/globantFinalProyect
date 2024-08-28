@@ -8,16 +8,22 @@ package globant.vistas;
  *
  * @author Enmanuel
  */
-public class MainMenu implements Menu {
+public final class MainMenu implements Menu {
 
-    @Override
+    private MainMenu() {
+        throw new UnsupportedOperationException("No se puede instanciar esta clase.");
+    }
+
     public void mostrarMenu() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
+        System.out.println(Menu.separador);
+        System.out.println("Que desea hacer: ");
+        System.out.println("1. Comprar al exchange. ");
+        System.out.println("2. Publicar orden de compra. ");
+        System.out.println("3. Publicar orden de venta. ");
+        System.out.println("4. Ver balance de cartera. ");
+        System.out.println("5. Cerrar sesion. ");
+        System.out.println("0. Salir del exchange. ");
 
-    @Override
-    public String seleccionarOpcion(String opcion) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        System.out.println(Menu.separador);
     }
-    
 }
