@@ -9,6 +9,13 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <maven.compiler.source>21</maven.compiler.source>
         <maven.compiler.target>21</maven.compiler.target>
-        <exec.mainClass>globant.cripto.Vista</exec.mainClass>
+        <exec.mainClass>globant.vistas.Vista</exec.mainClass>
     </properties>
+    <dependencies>
+    <dependency>
+        <groupId>commons-validator</groupId>
+        <artifactId>commons-validator</artifactId>
+        <version>1.8.0</version>
+    </dependency>
+    </dependencies>
 </project>

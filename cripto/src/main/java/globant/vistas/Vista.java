@@ -6,16 +6,18 @@ package globant.vistas;
 
 //import globant.clases.Usuario;
 
+import java.util.LinkedHashMap;
+
+
 /**
  *
  * @author Enmanuel
  */
 public class Vista {
-
+    
     public static void main(String[] args) {
-        String separador = new String(new char[50]).replace('\0', '=');
-        System.out.println("Bienvenido al exchange");
-        System.out.println(separador);
-        
+        LinkedHashMap opciones = Menu.MenuBuilder("inicio");
+        Menu.mostrarMenu();
+        System.out.println(Menu.seleccionarOpcion(opciones));
     }
 }
