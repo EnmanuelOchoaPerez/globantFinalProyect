@@ -6,6 +6,9 @@ package globant.vistas;
 
 //import globant.clases.Usuario;
 
+import java.util.LinkedHashMap;
+
+
 /**
  *
  * @author Enmanuel
@@ -13,7 +16,8 @@ package globant.vistas;
 public class Vista {
     
     public static void main(String[] args) {
-        UnloggedMenu.mostrarMenu();
-
+        LinkedHashMap opciones = Menu.MenuBuilder("inicio");
+        Menu.mostrarMenu();
+        System.out.println(Menu.seleccionarOpcion(opciones));
     }
 }

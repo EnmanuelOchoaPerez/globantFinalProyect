@@ -4,10 +4,15 @@
  */
 package globant.controladores;
 
+import java.util.Scanner;
+
+import org.apache.commons.validator.EmailValidator;
+
 /**
  *
  * @author Enmanuel
  */
 public class UsuarioControl {
-    
+
 }
+
