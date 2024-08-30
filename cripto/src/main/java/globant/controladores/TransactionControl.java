@@ -4,10 +4,13 @@
  */
 package globant.controladores;
 
+import globant.clases.Usuario;
+
 /**
  *
  * @author Enmanuel
  */
 public class TransactionControl {
     
+
 }

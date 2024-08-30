@@ -13,7 +13,6 @@ import java.math.BigDecimal;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Scanner;
-import org.apache.commons.validator.EmailValidator;
 
 public class Usuario {
 
@@ -44,13 +43,16 @@ public class Usuario {
         private Map<String, BigDecimal> cartera = new HashMap<>();
 
         public Builder() {
+            this.nombre = setNombre();
+            this.email = setEmail();
+            this.password = setPassword();
             this.id = generarIdUnico();
             this.cartera.put("USD", new BigDecimal("0.0"));
             this.cartera.put("BTC", new BigDecimal("0.0"));
             this.cartera.put("ETH", new BigDecimal("0.0"));
         }
 
-        public Builder setNombre() {
+        public String setNombre() {
             Scanner scanner = new Scanner(System.in);
             while (true) {
                 System.out.println("Ingrese su nombre: \n");
@@ -62,39 +64,35 @@ public class Usuario {
                     System.out.println("Nombre vacío, escriba de nuevo.");
                 }
             }
-            return this;
+            return nombre;
         }
 
-        public Builder setEmail() {
-            EmailValidator validator = EmailValidator.getInstance();
+        public String setEmail() {
+            String regex = "^[a-zA-Z0-9_-]+@[a-zA-Z0-9]+\\.[a-zA-Z]{2,6}$";
             Scanner scanner = new Scanner(System.in);
             while (true) {
                 System.out.println("Ingrese su email: \n");
                 String email = scanner.nextLine();
-                if (validator.isValid(email)) {
-                    this.email = email;
-                    break;
+                if (email.matches(regex)) {
+                    return email;
                 } else {
-                    System.out.println("Email inválido, escriba de nuevo.");
+                    System.out.println("Email invalido, escriba de nuevo.");
                 }
             }
-            return this;
         }
 
-        public Builder setPassword() {
+        public String setPassword() {
             Scanner scanner = new Scanner(System.in);
             String regex = "^(?=.*[0-9])(?=.*[A-Z])(?=.*[!@#$%^&*()_+\\-=\\[\\]{};':\"\\\\|,.<>\\/?]).+$";
             while (true) {
-                System.out.println("Crea su contraseña (min 12 caracteres, con mayúsculas, números y símbolos): \n");
+                System.out.println("Crea su contraseña (Minimo 8 caracteres, 1 mayúsculas, 1 numero y 1 simbolo): \n");
                 String pass = scanner.nextLine();
-                if (pass.length() >= 12 && pass.matches(regex)) {
-                    this.password = pass;
-                    break;
+                if (pass.length() >= 8 && pass.matches(regex)) {
+                    return password;
                 } else {
-                    System.out.println("Contraseña débil, escriba otra.");
+                    System.out.println("Contraseña debil, escriba otra.");
                 }
             }
-            return this;
         }
 
         public Usuario build() {
@@ -118,9 +116,18 @@ public class Usuario {
             System.out.println(tipo + ": " + valor);
         }
     }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public boolean validarUsuario(String email, String password) {
+        return (this.email != null && this.email.equals(email)) && (this.password != null && this.password.equals(password));
+    }
+
     @Override
     public String toString() {
-        return "Usuario:" + id + "\n" + "de nombre" + nombre + "\n" +
-               "Email:" + email;
+        return "Usuario:" + id + "\n" + "de nombre" + nombre + "\n"
+                + "Email:" + email;
     }
 }
