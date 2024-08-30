@@ -8,16 +8,19 @@ package globant.vistas;
  *
  * @author Enmanuel
  */
-public class UnloggedMenu implements Menu {
+public final class UnloggedMenu implements Menu {
 
-    @Override
-    public void mostrarMenu() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    private UnloggedMenu() {
+        throw new UnsupportedOperationException("No se puede instanciar esta clase.");
     }
 
-    @Override
-    public String seleccionarOpcion(String opcion) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    public static void mostrarMenu() {
+        System.out.println("Bienvenido al exchange");
+        System.out.println(Menu.separador);
+        System.out.println("Que desea hacer: ");
+        System.out.println("1. Iniciar sesion. ");
+        System.out.println("2. Registrarse. ");
+        System.out.println("0. Salir del exchange. ");
+        System.out.println(Menu.separador);
     }
-        
 }
