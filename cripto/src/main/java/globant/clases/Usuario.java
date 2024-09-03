@@ -1,3 +1,4 @@
+
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
@@ -10,7 +11,7 @@ package globant.clases;
  */
 import java.util.UUID;
 import java.math.BigDecimal;
-import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.Scanner;
 
@@ -20,7 +21,8 @@ public class Usuario {
     private String nombre;
     private String email;
     private String password;
-    private Map<String, BigDecimal> cartera;
+    private LinkedHashMap<String, BigDecimal> cartera;
+    private final LinkedHashMap<String, Orden> registroU = new LinkedHashMap<>();
 
     private Usuario(Builder builder) {
         this.id = builder.id;
@@ -40,7 +42,7 @@ public class Usuario {
         private String nombre;
         private String email;
         private String password;
-        private Map<String, BigDecimal> cartera = new HashMap<>();
+        private LinkedHashMap<String, BigDecimal> cartera = new LinkedHashMap<>();
 
         public Builder() {
             this.nombre = setNombre();
@@ -56,25 +58,26 @@ public class Usuario {
             Scanner scanner = new Scanner(System.in);
             while (true) {
                 System.out.println("Ingrese su nombre: \n");
-                String nombre = scanner.nextLine();
-                if (!nombre.isEmpty()) {
-                    this.nombre = nombre;
-                    break;
+                String name = scanner.nextLine();
+
+                if (!name.isEmpty()) {
+                    return name;
                 } else {
                     System.out.println("Nombre vacío, escriba de nuevo.");
                 }
             }
-            return nombre;
         }
 
         public String setEmail() {
             String regex = "^[a-zA-Z0-9_-]+@[a-zA-Z0-9]+\\.[a-zA-Z]{2,6}$";
-            Scanner scanner = new Scanner(System.in);
+
             while (true) {
                 System.out.println("Ingrese su email: \n");
-                String email = scanner.nextLine();
-                if (email.matches(regex)) {
-                    return email;
+                Scanner scanner = new Scanner(System.in);
+                String mail = scanner.nextLine();
+
+                if (mail.matches(regex)) {
+                    return mail;
                 } else {
                     System.out.println("Email invalido, escriba de nuevo.");
                 }
@@ -82,13 +85,14 @@ public class Usuario {
         }
 
         public String setPassword() {
-            Scanner scanner = new Scanner(System.in);
-            String regex = "^(?=.*[0-9])(?=.*[A-Z])(?=.*[!@#$%^&*()_+\\-=\\[\\]{};':\"\\\\|,.<>\\/?]).+$";
+
             while (true) {
-                System.out.println("Crea su contraseña (Minimo 8 caracteres, 1 mayúsculas, 1 numero y 1 simbolo): \n");
+                System.out.println("Crea su contraseña (Minimo 8 caracteres.):\n");
+                Scanner scanner = new Scanner(System.in);
                 String pass = scanner.nextLine();
-                if (pass.length() >= 8 && pass.matches(regex)) {
-                    return password;
+
+                if (pass.length() >= 8) {
+                    return pass;
                 } else {
                     System.out.println("Contraseña debil, escriba otra.");
                 }
@@ -100,6 +104,16 @@ public class Usuario {
         }
     }
 
+    public int comprobar(String cantidad, String tipo) {
+        BigDecimal currency = this.cartera.get(tipo);
+        BigDecimal monto = new BigDecimal(cantidad);
+        if (monto.compareTo(currency) >= 0) {
+            System.out.println("fondos suficientes");
+
+        }
+        return monto.compareTo(currency);
+    }
+
     public void sumar(BigDecimal cantidad, String tipo) {
         cartera.put(tipo, cartera.get(tipo).add(cantidad));
     }
@@ -108,9 +122,9 @@ public class Usuario {
         cartera.put(tipo, cartera.get(tipo).subtract(cantidad));
     }
 
-    public void balance() {
+    public void balance(Usuario Usu) {
         System.out.println("Balance: ");
-        for (Map.Entry<String, BigDecimal> entrada : cartera.entrySet()) {
+        for (Map.Entry<String, BigDecimal> entrada : Usu.cartera.entrySet()) {
             String tipo = entrada.getKey();
             BigDecimal valor = entrada.getValue();
             System.out.println(tipo + ": " + valor);
@@ -118,7 +132,7 @@ public class Usuario {
     }
 
     public String getEmail() {
-        return email;
+        return this.email;
     }
 
     public boolean validarUsuario(String email, String password) {
@@ -127,7 +141,27 @@ public class Usuario {
 
     @Override
     public String toString() {
-        return "Usuario:" + id + "\n" + "de nombre" + nombre + "\n"
+        return "Usuario:" + id + "\n" + "de nombre " + nombre + "\n"
                 + "Email:" + email;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+
+        if (obj == null || getClass() != obj.getClass()) {
+            return false;
+        }
+
+        Usuario other = (Usuario) obj;
+
+        return id != null && id.equals(other.id);
+    }
+
+    @Override
+    public int hashCode() {
+        return id != null ? id.hashCode() : 0;
     }
 }

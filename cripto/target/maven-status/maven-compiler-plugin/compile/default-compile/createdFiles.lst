@@ -1,6 +1,11 @@
 globant\controladores\TransactionControl.class
-globant\clases\Usuario$Builder.class
+globant\controladores\TransactionControl$1.class
 globant\clases\Usuario.class
-globant\vistas\Vista.class
 globant\controladores\UsuarioControl.class
 globant\vistas\Menu.class
+globant\clases\Orden.class
+globant\clases\Usuario$Builder.class
+globant\vistas\Vista.class
+globant\clases\Venta.class
+globant\clases\Compra.class
+globant\vistas\Menu$1.class
